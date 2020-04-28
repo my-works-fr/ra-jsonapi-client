@@ -96,8 +96,7 @@ export default (apiUrl, userSettings = {}) => (type, resource, params) => {
 
       // Add sort parameter
       if (params.sort && params.sort.field) {
-        const prefix = params.sort.order === 'ASC' ? '' : '-';
-        query.sort = `${prefix}${params.sort.field}`;
+        query['sort[' + params.sort.field + ']'] = params.sort.order;
       }
 
       url = `${apiUrl}/${resource}?${stringify(query)}`;
