@@ -32,6 +32,8 @@ var _initializer2 = _interopRequireDefault(_initializer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /** This proxy ensures that every relationship is serialized to an object of the form {id: x}, even
@@ -109,16 +111,15 @@ exports.default = function (apiUrl) {
     switch (type) {
       case _actions.GET_LIST:
         {
+          var _query;
+
           var _params$pagination = params.pagination,
               page = _params$pagination.page,
               perPage = _params$pagination.perPage;
 
           // Create query with pagination params.
 
-          var query = {
-            'page[number]': page,
-            'page[size]': perPage
-          };
+          var query = (_query = {}, _defineProperty(_query, settings.pagination.page, page), _defineProperty(_query, settings.pagination.perPage, perPage), _query);
 
           // Add all filter params to query.
           Object.keys(params.filter || {}).forEach(function (key) {
@@ -127,8 +128,7 @@ exports.default = function (apiUrl) {
 
           // Add sort parameter
           if (params.sort && params.sort.field) {
-            var prefix = params.sort.order === 'ASC' ? '' : '-';
-            query.sort = '' + prefix + params.sort.field;
+            query['sort[' + params.sort.field + ']'] = params.sort.order;
           }
 
           url = apiUrl + '/' + resource + '?' + (0, _qs.stringify)(query);
@@ -163,36 +163,35 @@ exports.default = function (apiUrl) {
 
       case _actions.GET_MANY:
         {
-          var _query = (0, _qs.stringify)({
+          var _query2 = (0, _qs.stringify)({
             'filter[id]': params.ids
           }, { arrayFormat: settings.arrayFormat });
 
-          url = apiUrl + '/' + resource + '?' + _query;
+          url = apiUrl + '/' + resource + '?' + _query2;
           break;
         }
 
       case _actions.GET_MANY_REFERENCE:
         {
+          var _query4;
+
           var _params$pagination2 = params.pagination,
               _page = _params$pagination2.page,
               _perPage = _params$pagination2.perPage;
 
           // Create query with pagination params.
 
-          var _query2 = {
-            'page[number]': _page,
-            'page[size]': _perPage
-          };
+          var _query3 = (_query4 = {}, _defineProperty(_query4, settings.pagination.page, _page), _defineProperty(_query4, settings.pagination.perPage, _perPage), _query4);
 
           // Add all filter params to query.
           Object.keys(params.filter || {}).forEach(function (key) {
-            _query2['filter[' + key + ']'] = params.filter[key];
+            _query3['filter[' + key + ']'] = params.filter[key];
           });
 
           // Add the reference id to the filter params.
-          _query2['filter[' + params.target + ']'] = params.id;
+          _query3['filter[' + params.target + ']'] = params.id;
 
-          url = apiUrl + '/' + resource + '?' + (0, _qs.stringify)(_query2);
+          url = apiUrl + '/' + resource + '?' + (0, _qs.stringify)(_query3);
           break;
         }
 
