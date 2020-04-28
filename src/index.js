@@ -164,7 +164,7 @@ export default (apiUrl, userSettings = {}) => (type, resource, params) => {
 
   return axios({ url, ...options })
     .then((response) => {
-      const opts = new Proxy(settings.deserializerOpts[resource] || {}, relationshipProxyHandler);
+      const opts = new Proxy(settings.deserializerOpts || {}, relationshipProxyHandler);
 
       switch (type) {
         case GET_MANY:
