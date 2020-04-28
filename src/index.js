@@ -85,8 +85,8 @@ export default (apiUrl, userSettings = {}) => (type, resource, params) => {
 
       // Create query with pagination params.
       const query = {
-        'page[number]': page,
-        'page[size]': perPage,
+        [settings.pagination.page]: page,
+        [settings.pagination.perPage]: perPage,
       };
 
       // Add all filter params to query.
@@ -143,8 +143,8 @@ export default (apiUrl, userSettings = {}) => (type, resource, params) => {
 
       // Create query with pagination params.
       const query = {
-        'page[number]': page,
-        'page[size]': perPage,
+        [settings.pagination.page]: page,
+        [settings.pagination.perPage]: perPage,
       };
 
       // Add all filter params to query.
