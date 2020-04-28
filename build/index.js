@@ -200,7 +200,7 @@ exports.default = function (apiUrl) {
     }
 
     return (0, _axios2.default)(_extends({ url: url }, options)).then(function (response) {
-      var opts = new Proxy(settings.deserializerOpts[resource] || {}, relationshipProxyHandler);
+      var opts = new Proxy(settings.deserializerOpts || {}, relationshipProxyHandler);
 
       switch (type) {
         case _actions.GET_MANY:
