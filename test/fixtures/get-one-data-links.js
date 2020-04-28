@@ -5,10 +5,11 @@ export default {
     attributes: {
       name: 'Bob',
     },
-    relationships: {
-      address: {
-        data: { type: 'address', id: '2' }
-      }
-    }
-  }
+    links: {
+      self: '/user/1',
+    },
+  },
+  links: {
+    related: '/user/1',
+  },
 };

@@ -5,4 +5,7 @@ export default {
     'Content-Type': 'application/vnd.api+json; charset=utf-8',
   },
   updateMethod: 'PATCH',
+  arrayFormat: 'brackets',
+  serializerOpts: {},
+  deserializerOpts: {},
 };

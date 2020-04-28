@@ -6,8 +6,10 @@ export default {
       name: 'Bob',
     },
     relationships: {
-      address: {
-        data: { type: 'address', id: '2' }
+      cars: {
+        links: {
+          related: '/users/1/cars',
+        },
       }
     }
   }
