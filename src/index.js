@@ -38,7 +38,7 @@ const relationshipProxyHandler = {
           return included;
         }
 
-        return { id: data.id };
+        return { id: data.id, _id: data.id.substring(data.id.lastIndexOf('/') + 1) };
       },
     }, fallback || {});
   },
@@ -129,6 +129,8 @@ export default (apiUrl, userSettings = {}) => (type, resource, params) => {
       break;
 
     case GET_MANY: {
+      // eslint-disable-next-line no-param-reassign
+      if (params.ids[0].id) params.ids = params.ids[0].id;
       const query = stringify({
         'filter[id]': params.ids,
       }, { arrayFormat: settings.arrayFormat });
